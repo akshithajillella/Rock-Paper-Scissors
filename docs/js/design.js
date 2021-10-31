@@ -3,12 +3,19 @@ function getRandom(array) {
 }
 
 function displayRndm(compPick, pickRndm) {
-	compPick = getRandom(list);
-		switch(compPick){
-			case 'rock': pickRndm.innerHTML = '<img src="img/rock.png" alt="rock" id="pick-rndm">'; break;
-			case 'paper': pickRndm.innerHTML = '<img src="img/paper.png" alt="paper" id="pick-rndm">'; break;
-			case 'scissors': pickRndm.innerHTML = '<img src="img/scissors.png" alt="scissors" id="pick-rndm">'; break;
-		}
+	compPick = getRandom(options);
+	if (compPick === 'rock') {
+		pickRndm.innerHTML = '<img src="img/rock.png" alt="rock" class="pick-rndm">';
+	} else if (compPick === 'paper') {
+		pickRndm.innerHTML = '<img src="img/paper.png" alt="paper" class="pick-rndm">';
+	} else {
+		pickRndm.innerHTML = '<img src="img/scissors.png" alt="scissors" class="pick-rndm">';
+	}
+		// switch(compPick){
+		// 	case 'rock': pickRndm.innerHTML = '<img src="img/rock.png" alt="rock" class="pick-rndm">'; break;
+		// 	case 'paper': pickRndm.innerHTML = '<img src="img/paper.png" alt="paper" class="pick-rndm">'; break;
+		// 	case 'scissors': pickRndm.innerHTML = '<img src="img/scissors.png" alt="scissors" class="pick-rndm">'; break;
+		// }
 }
 
 function setUserPick(userPick, choice) {
@@ -24,7 +31,7 @@ function setUserPick(userPick, choice) {
 }
 
 
-const list = ["rock", "paper", "scissors"];
+const options = ["rock", "paper", "scissors"];
 
 var userPick = null;
 var compPick = null;
@@ -33,8 +40,6 @@ var pickRndm = document.getElementById('blank-img');
 var choice = document.getElementById('choice');
 
 var playButton = document.getElementById('button');
-
-var result = null;
 
 
 choice.addEventListener('click', function(evt) {
@@ -53,35 +58,35 @@ playButton.addEventListener('click', function (){
 		displayRndm(compPick, pickRndm);
 	}
 	setTimeout( function(){
-    	result = compare(userPick, compPick);
+    	var result = compare(userPick, compPick);
 		alert(result);
   	}, 500 );
 });
 
 
-var compare = function(choice1,choice2) {
-    if (choice1 === choice2) {
+var compare = function(userPick,compPick) {
+    if (userPick === compPick) {
         return "It's a tie!";
     }
 
-    if (choice1 === "rock") {
-        if (choice2 === "scissors") {
+    else if (userPick === "rock") {
+        if (compPick === "scissors") {
             return "You win!";
         } else {
             return "You lose! Try again.";
         }
     }
 
-    if (choice1 === "paper") {
-        if (choice2 === "rock") {
+    else if (userPick === "paper") {
+        if (compPick === "rock") {
             return "You win!";
         } else {
             return "You lose! Try again.";
         }
     }
 
-    if (choice1 === "scissors") {
-        if (choice2 === "rock") {
+    else if (userPick === "scissors") {
+        if (compPick === "rock") {
             return "You lose! Try again.";
         } else {
             return "You win!";
